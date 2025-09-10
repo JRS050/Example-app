@@ -14,11 +14,20 @@ class AuthController extends Controller
             'name' => ['required'],
             'password' => ['required'],
         ]);
- 
+
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
  
-            return redirect()->intended('/welcome');
+            return redirect()->intended('/me');
         }
+    }
+
+    public function me(){
+         $user = Auth::user();
+        
+        return response()->json([ 
+            'id' => $user->id, 
+            'name' => $user->name
+        ]);
     }
 }
