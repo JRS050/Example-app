@@ -9,6 +9,8 @@ const fetchUserData = async () => {
   try {
     const response = await axios.get('/api/me');
     user.value = response.data;
+    console.log('User Data:', response.data);
+    return response.data;
    
   } catch (error) {
     console.error('Error fetching user data:', error);
